@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>ol3 - Ex7B - homemade GetFeatureInfo</title>
+        <script type="text/javascript" src="js/config.js"></script>
+        <script type="text/javascript">
+            var map;
+            $(document).ready(function(){
+
+                var wmsSource = new ol.source.ImageWMS({
+                  url: 'https://eu1.mapcentia.com/wms/oertz/public',
+                  params:{
+                    VERSION: "1.1.1",
+                    LAYERS: 'public.world_simple',
+                    FORMAT: 'image/png'
+                },
+                  serverType: 'mapserver',
+                });
+
+                var wmsLayer = new ol.layer.Image({
+                  source: wmsSource
+                });
+
+                var view = new ol.View({
+                  center: [0, 0],
+                  zoom: 1,
+                  projection: "EPSG:4326"
+                });
+
+                map = new ol.Map({
+                  layers: [wmsLayer],
+                  target: 'map',
+                  view: view
+                });
+
+                map.on('singleclick', function(evt) {
+                    var viewResolution = (view.getResolution());
+                    getFeatureInfo(evt.coordinate);
+                });
+
+                function getFeatureInfo(coordinates){
+                    var request = $.ajax({
+                      url: getInfo = "php/GetCountriesByXY.php?x=" + coordinates[0] + "&y=" + coordinates[1],
+                      dataType: 'json',
+                      method: "GET"
+                    });
+                    request.done(function( data ) {
+                        $("#info").html(data.features[0].properties.name);
+                    });
+                    request.fail(function( jqXHR, textStatus ) {
+                      alert( "Request failed: " + textStatus );
+                    });
+                }
+
+            });
+        </script>
+
+        <style type="text/css">
+            #map {
+                width: 100%;
+                height: 100%;
+            }
+            #info {
+                position: absolute;
+                top: 20px;
+                left: 50px;
+                background-color: white;
+                border: solid gray 1px;
+                padding: 5px;
+                font-size: smaller;
+                z-index: 1000000000;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <div id="info">Click on the map to get feature info</div>
+    </body>
+</html>

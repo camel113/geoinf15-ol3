@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>ol3 - Ex4C - webmap with tiled layer</title>
+        <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.core.js"></script>
+        <script type="text/javascript" src="js/config.js"></script>
+        <script type="text/javascript">
+            var map;        
+            $(document).ready(function(){
+                map = new ol.Map({
+                    view: new ol.View({
+                        center:ol.proj.transform([7,47], 'EPSG:4326', 'EPSG:3857'),
+                        zoom: 13
+                    }),
+                    target: 'map',
+                    layers: [
+                        new ol.layer.Tile({
+                            source: new ol.source.OSM()
+                        })
+                    ]
+                })
+                cartodb.Tiles.getTiles({
+                    type: 'cartodb', user_name: 'ogo', sublayers: [{
+                            sql: 'SELECT * FROM g4districts98',
+                            cartocss: "#g4districts98 { line-color: red; line-width: 2;[ak='VD']{line-color: blue; line-width: 2;}}"
+                        }]
+                }, function(tileTemplate) { // create layer with generated tiles URL
+                    tilesUrl = tileTemplate.tiles[0]
+                            .replace('{s}', 'a')
+                            .replace('{z}', '{z}')
+                            .replace('{x}', '{x}')
+                            .replace('{y}', '{y}');
+
+                    admLyr = new ol.layer.Tile({
+                        source: new ol.source.XYZ({
+                            url: tilesUrl
+                        })
+                    })
+                    map.addLayer(admLyr);
+                });
+            });
+        </script>
+
+        <style type="text/css">
+            #map {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+</html>

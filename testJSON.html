@@ -1,0 +1,50 @@
+
+<html>
+    <head>
+        <title>ol3 - Ex4A - one WMS request for two layers</title>
+        <script type="text/javascript" src="js/config.js"></script>
+        <script type="text/javascript">
+            var map;        
+            $(document).ready(function(){
+                $.ajax({
+                   url: "http://localhost:3000",
+                   type: "GET",
+                   // beforeSend: function(xhr){xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');},
+                   success: function() { console.log('Success'); }
+                });
+                // $.getJSON({
+                //    url: "http://tifelek02.heig-vd.ch/2.5_day.geojson",
+                //    // beforeSend: function(xhr){xhr.setRequestHeader('X-Test-Header', 'test-value');},
+                //    success: function() { console.log('test'); }
+                // });
+                // $.ajax({
+                //     url: 'http://tifelek02.heig-vd.ch/2.5_day.geojson',
+                //     type: 'GET',
+                //     dataType: "json",
+                //     beforeSend: function(xhr) {
+                //         xhr.setRequestHeader(
+                //             'X-Requested-With',
+                //             {
+                //                 toString: function() { return ''; }
+                //             }
+                //         );
+                //     },
+                //     success: function(result) {
+                //        alert('result');   
+                //     }
+                // });
+                
+            });
+        </script>
+
+        <style type="text/css">
+            #map {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+</html>
