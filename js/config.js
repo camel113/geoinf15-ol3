@@ -19,8 +19,8 @@
 stylesheetTag = '<link rel="stylesheet" href="http://openlayers.org/en/v3.4.0/css/ol.css" type="text/css">'
 document.write(stylesheetTag);
 
-scriptTag = '<script src="../lib/ol3.4.0/build/ol.js" type="text/javascript"></script>';
+scriptTag = '<script src="http://openlayers.org/en/v3.4.0/build/ol.js" type="text/javascript"></script>';
 document.write(scriptTag);
 
-scriptTag = '<script src="../lib/jquery-2.1.3.min.js" type="text/javascript"></script>';
+scriptTag = '<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>';
 document.write(scriptTag);
