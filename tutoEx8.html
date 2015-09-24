@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title>ol3 - Ex8 - Vector overlay loading strategies</title>
+        <link rel="stylesheet" href="http://openlayers.org/en/v3.9.0/css/ol.css" type="text/css">
+        <script src="http://openlayers.org/en/v3.9.0/build/ol.js" type="text/javascript"></script>
+        <script src="lib/layerswitcher/ol3-layerswitcher.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="lib/layerswitcher/ol3-layerswitcher.css" type="text/css">
+        <script src="lib/jquery-2.1.3.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function(){
+
+                
+                var olMap = (function() {
+ 
+                    var osmLayer = new ol.layer.Tile({
+                      source: new ol.source.OSM()
+                    });
+
+                    var view = new ol.View({
+                      center: ol.proj.transform([8,47],"EPSG:4326","EPSG:3857"),
+                      zoom: 5
+                    });
+
+                    var overlayGroup = new ol.layer.Group({
+                        title: 'Overlays',
+                        layers: [
+                        ]
+                    });
+
+                    var map = new ol.Map({
+                      layers: [osmLayer,overlayGroup],
+                      target: 'map',
+                      view: view
+                    });
+
+                    var addLine = function(coordinates,name){
+                        var color = helpers.getRandomColor();
+                        var width = 2;
+                        var style = new ol.style.Style({
+                         stroke: new ol.style.Stroke({
+                           color: color,
+                           width: width
+                         })
+                        })
+                        
+                        var geom = new ol.geom.LineString(coordinates);
+
+                        var feature = new ol.Feature({
+                          geometry: geom
+                        });
+
+                        var vectorSource = new ol.source.Vector()
+
+                        vectorSource.addFeature(feature)
+
+                        var lyr = new ol.layer.Vector({
+                            title: 'Line '+name,
+                            source: vectorSource,
+                            style: style
+                        })
+
+                        overlayGroup.getLayers().push(lyr)
+                    }
+
+                    return {
+                        map: map,
+                        addLine: addLine
+                    }
+
+                })();
+
+                var helpers = (function() {
+                    var getRandomArbitrary = function(min, max) {
+                        return Math.random() * (max - min) + min;
+                    }
+                    var getRandomColor = function(){
+                        return [getRandomArbitrary(0,255), getRandomArbitrary(0,255), getRandomArbitrary(0,255), 1]
+                    }
+                    return {getRandomColor: getRandomColor}
+                })()
+                
+                
+
+                lineCntr = 0
+                clickCntr = 0
+                coordinates = []
+                olMap.map.on('singleclick',function(e){
+                    clickCntr++
+                    if(clickCntr != 2){
+                        coordinates.push(e.coordinate)
+                    }else{
+                        coordinates.push(e.coordinate)
+                        olMap.addLine(coordinates,lineCntr++)
+                        clickCntr = 0
+                        coordinates = []
+                    }
+                })
+
+                var layerSwitcher = new ol.control.LayerSwitcher({
+                    tipLabel: 'Légende' // Optional label for button
+                });
+
+                olMap.map.addControl(layerSwitcher);
+
+
+            })
+        </script>
+
+        <style type="text/css">
+            #map {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <div id="info"></div>
+    </body>
+</html>
