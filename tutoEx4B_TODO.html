@@ -12,12 +12,18 @@
                 map = new ol.Map({
                     target: 'map',
                     layers: [
-                        new ol.layer.Tile({
-                            title: 'Bing Base Map',
-                            source: new ol.source.BingMaps({
-                                key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
-                                imagerySet: 'Aerial'
-                            })
+                        new ol.layer.Group({
+                            'title': 'Base maps',
+                            layers:[
+                                new ol.layer.Tile({
+                                    title: 'Bing Base Map',
+                                    type: 'base',
+                                    source: new ol.source.BingMaps({
+                                        key: 'Ak-dzM4wZjSqTlzveKz5u0d4IQ4bRzVI309GxmkgSVr1ewS6iPSrOvOKhA-CJlm3',
+                                        imagerySet: 'Aerial'
+                                    })
+                                }),
+                            ]
                         }),
                         new ol.layer.Group({
                             title: 'Overlays',
