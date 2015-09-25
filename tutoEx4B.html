@@ -10,29 +10,40 @@
                 map = new ol.Map({
                     target: 'map',
                     layers: [
-                        new ol.layer.Image({
+                        new ol.layer.Group({
                             'title': 'Base maps',
-                            source: new ol.source.ImageWMS({
-                                url: "https://eu1.mapcentia.com/wms/oertz/public",
-                                title: 'World simple',
-                                type:'base',
-                                params:{
-                                    VERSION: "1.1.1",
-                                    LAYERS: 'public.world_simple',
-                                    FORMAT: 'image/png'
-                                }
-                            })
+                            layers: [
+                                new ol.layer.Image({
+                                    'type': 'base',
+                                    'title': 'Base maps',
+                                    source: new ol.source.ImageWMS({
+                                        url: "https://eu1.mapcentia.com/wms/oertz/public",
+                                        title: 'World simple',
+                                        type:'base',
+                                        params:{
+                                            VERSION: "1.1.1",
+                                            LAYERS: 'public.world_simple',
+                                            FORMAT: 'image/png'
+                                        }
+                                    })
+                                })
+                            ]
                         }),
-                        new ol.layer.Image({
-                            title: 'Cities',
-                            source: new ol.source.ImageWMS({
-                                    url: "https://eu1.mapcentia.com/wms/oertz/public",
-                                    params:{
-                                        VERSION: "1.1.1",
-                                        LAYERS: 'public.cities',
-                                        FORMAT: 'image/png'
-                                }
-                            })
+                        new ol.layer.Group({
+                            'title': 'Overlays',
+                            layers: [
+                                new ol.layer.Image({
+                                    title: 'Cities',
+                                    source: new ol.source.ImageWMS({
+                                            url: "https://eu1.mapcentia.com/wms/oertz/public",
+                                            params:{
+                                                VERSION: "1.1.1",
+                                                LAYERS: 'public.cities',
+                                                FORMAT: 'image/png'
+                                        }
+                                    })
+                                })
+                            ]
                         })
                     ]
                 }); 
