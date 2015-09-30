@@ -26,7 +26,7 @@
                 var extent = map.getView().getProjection().getExtent()
                 //fit to max extent
                 // map.getView().fitExtent(extent, map.getSize());
-                map.getView().fitExtent([-18,38,38,55],map.getSize());
+                map.getView().fit([-18,38,38,55],map.getSize());
                 console.log(map.getView().getProjection());
             });
         </script>
