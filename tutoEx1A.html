@@ -13,11 +13,11 @@
                 });
                 var wmsTileLayer = new ol.layer.Tile({
                     source: new ol.source.TileWMS({
-                            url: "https://eu1.mapcentia.com/wms/oertz/public",
+                            url: myOWS,
                             params:{
                                 VERSION: "1.1.1",
-                                LAYERS: 'public.world_simple',
-                                FORMAT: 'image/png'
+                                LAYERS: "world_simple",
+                                FORMAT: "image/png"
                         }
                     }),
                 })
