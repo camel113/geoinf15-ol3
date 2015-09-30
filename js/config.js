@@ -4,6 +4,8 @@
 
  var myWMS = "https://eu1.mapcentia.com/wms/oertz/public";
  var myWFS = "https://eu1.mapcentia.com/wfs/oertz/public/4326";
+ 
+ var myOWS = "http://geoserver-heig.rhcloud.com/geoinf/ows";
 
  var remoteSLD = "http://172.16.107.1/ol2014/sld";   //"http://172.16.213.129/webmaptuto/sld";
 
