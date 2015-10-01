@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Navmap - Two layers</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+               
+        <script type="text/javascript" src="js/config.js"></script>        
+        <script type="text/javascript">
+            var ctrx, ctry, x, y;
+            var zoom = 2;
+            var pan = 10;            
+            
+            $(document).ready(function(){
+                // situation initiale
+                ctrx = 0;
+                ctry = 0;
+                x = 180;
+                y = 90;
+                
+                doGetMapRequests();
+                $("span").click(navmap);
+            });
+            
+            function navmap(e) {
+                switch ($(this).first().attr("id")) {
+                    case "westBtn":
+                        ctrx = ctrx - pan;
+                        break;
+                    case "northBtn":
+                        ctry = ctry + pan;
+                        break;
+                    case "eastBtn":
+                        ctrx = ctrx + pan;
+                        break;
+                    case "southBtn":
+                        ctry = ctry - pan;
+                        break;
+                    case "zinBtn":
+                        x = x / zoom;
+                        y = y / zoom;
+                        break;
+                    case "zoutBtn":
+                        x = x * zoom;
+                        y = y * zoom;
+                        break;
+                }
+                doGetMapRequests();                
+            }
+            
+            function doGetMapRequests() {
+                minx = ctrx - x;
+                maxx = ctrx + x;
+                miny = ctry - y;
+                maxy = ctry + y;
+                
+                bbox = minx + "," + miny + "," + maxx + "," + maxy;
+                console.log(bbox);
+
+                params1 = { 
+                    service:"WMS",
+                    version:"1.1.0",
+                    request:"GetMap",
+                    layers:"ne:ne_10m_admin_0_countries",
+                    styles:"",
+                    bbox:bbox,
+                    width:800,
+                    height:400,
+                    srs:"EPSG:4326",
+                    format:"image/png"
+                };
+                
+                request = blWMS + "?" + jQuery.param(params1);
+                $("#layer1").attr("src", request);
+                    
+                params2 = { 
+                    service:"WMS",
+                    version:"1.1.0",
+                    request:"GetMap",
+                    layers:"maps:ne_10m_lakes",
+                    styles:"",
+                    bbox:bbox,
+                    width:800,
+                    height:400,
+                    srs:"EPSG:4326",
+                    format:"image/png",
+                    transparent: true
+                };             
+                
+                request = blWMS + "?" + jQuery.param(params2);                        
+                $("#layer2").attr("src", request);
+            }           
+        </script>
+        
+        <style type="text/css">
+            span {
+                font-weight: bold;
+            }
+                       
+            #map img {
+                width: 800;
+                height: 400;
+                position: absolute;
+                top: 50;
+            }              
+        </style>        
+
+    </head>
+    <body>
+        <p>
+            PAN: <span id="eastBtn">East</span> - <span id="northBtn">North</span> - <span id="westBtn">West</span> - <span id="southBtn">South</span> | 
+            ZOOM: <span id="zinBtn">In</span> - <span id="zoutBtn">Out</span>
+        </p>
+        <div id="map">
+            <img id="layer1" src="">
+            <img id="layer2" src="">          
+        </div>
+    </body>
+</html>
