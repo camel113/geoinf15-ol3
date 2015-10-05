@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Navmap - Overlay</title>
+        <title>Navmap - Feature info control</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>       
@@ -20,6 +20,7 @@
 
                 doGetMapRequests();
                 $("span").click(navmap);
+                $("img").click(doGetFeatureInfo);
             });
 
             function navmap(e) {
@@ -80,7 +81,7 @@
                     service: "WMS",
                     version: "1.1.0",
                     request: "GetMap",
-                    layers: "maps:ne_10m_lakes",
+                    layers: "ne_10m_lakes",
                     styles: "",
                     bbox: bbox,
                     width: 800,
@@ -92,6 +93,47 @@
 
                 request = blWMS + "?" + jQuery.param(params2);
                 $("#layer2").attr("src", request);
+            }
+
+            function doGetFeatureInfo(e) {
+                minx = ctrx - x;
+                maxx = ctrx + x;
+                miny = ctry - y;
+                maxy = ctry + y;
+
+                bbox = minx + "," + miny + "," + maxx + "," + maxy;
+                console.log(e);
+
+                params3 = {
+                    service: "WMS",
+                    version: "1.1.0",
+                    request: "GetFeatureInfo",
+                    bbox: bbox,
+                    srs: "EPSG:4326",
+                    height: 400,
+                    width: 800,
+                    layers: "ne:ne_10m_admin_0_countries",
+                    format: "image/png",
+                    styles: "",
+                    query_layers: "ne:ne_10m_admin_0_countries",
+                    x: e.clientX,
+                    y: e.clientY,
+                    feature_count: 50,
+                    info_format: "application/json"
+                }
+
+                $.ajax({
+                    url: blWMS,
+                    data: params3,
+                    dataType: "json",
+                    success: function (response) {
+                        info = response.features[0].properties.admin + " / " + response.features[0].properties.pop_est.toLocaleString() + " inhab.";
+                        $("#info").html(info);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("The request has failed: " + textStatus);
+                    }
+                });
             }
         </script>
 
@@ -123,6 +165,7 @@
             <p>PAN: <span id="eastBtn">East</span> - <span id="northBtn">North</span> - <span id="westBtn">West</span> - <span id="southBtn">South</span></p>
             <p>ZOOM: <span id="zinBtn">In</span> - <span id="zoutBtn">Out</span></p>
             <p>OVERLAY: <span id="lakesBtn">Lakes (on/off)</span></p>
+            <p>INFO: <span id="info"></span></p>
         </div>        
         <div id="map">
             <img id="layer1" src="">

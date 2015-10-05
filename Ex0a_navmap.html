@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Navmap - One layer</title>
+        <title>Navmap - Baselayer</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
-        <script type="text/javascript" src="js/config.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
         <script type="text/javascript">
+            var blWMS = "http://demo.boundlessgeo.com/geoserver/wms";
             var ctrx, ctry, x, y;
             var zoom = 2;
             var pan = 10;
@@ -60,7 +61,7 @@
                             + "service=WMS"
                             + "&version=1.1.0"
                             + "&request=GetMap"
-                            + "&layers=ne:ne_10m_admin_0_countries"
+                            + "&layers=ne_10m_admin_0_countries"
                             + "&styles="
                             + "&bbox="+bbox
                             + "&width=800"
