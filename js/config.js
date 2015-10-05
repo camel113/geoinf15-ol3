@@ -1,15 +1,40 @@
-/* 
+/*************************************************** 
  * Definition of global JS application parameters
+ **************************************************/
+
+ /*
+ * With the Boundless GeoServer you can play with layers: 
+ * - ne_10m_admin_0_countries
+ * - ne_10m_lakes
+ * - etc (see http://demo.boundlessgeo.com/geoserver/wms?REQUEST=GetCapabilities)
  */
+ var blWMS = "http://demo.boundlessgeo.com/geoserver/wms";
 
- var myWMS = "https://eu1.mapcentia.com/wms/oertz/public";
- var myWFS = "https://eu1.mapcentia.com/wfs/oertz/public/4326";
- 
+/*
+ * With the MapCentia MapServer you can play with layers: 
+ * - public.world_simple
+ * - public.cities
+ * - public.cantonsch_region
+ * - etc (see https://eu1.mapcentia.com/wms/oertz/public?service=WMS&request=GetCapabilities)
+ */
+ var mcWMS = "https://eu1.mapcentia.com/wms/oertz/public";
+ var mcWFS = "https://eu1.mapcentia.com/wfs/oertz/public/4326";
+
+/*
+ * With our rhcloud GeoServer you can play with layers: 
+ * - world_simple
+ * - cities
+ * - etc (see http://geoserver-heig.rhcloud.com/geoinf/ows?service=WMS&version=1.1.0&request=GetCapabilities)
+ */
  var myOWS = "http://geoserver-heig.rhcloud.com/geoinf/ows";
-
- var remoteSLD = "http://172.16.107.1/ol2014/sld";   //"http://172.16.213.129/webmaptuto/sld";
-
- var proxy = 'http://localhost:8888/openlayers/ol3/tuto/php/proxy2.php?url='
+ 
+ /*
+ * With the Swisstopo MapServer you can play with layers: 
+ * - ch.swisstopo.swissboundaries3d-kanton-flaeche.fill
+ * - ch.swisstopo.swissboundaries3d-gemeinde-flaeche.fill
+ * - etc (see http://wms.geo.admin.ch/?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.0.0&lang=fr)
+ */
+ var chWMS = "https://wms.geo.admin.ch";
 
 /* 
  * Insertion of <script> and <stylesheet> elements to load required libraries :
