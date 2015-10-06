@@ -8,8 +8,8 @@
                 map = new ol.Map({
                     target: 'map'
                 });
-                var wmsLayer = new ol.layer.Tile({
-                    source: new ol.source.TileWMS({
+                var wmsLayer = new ol.layer.Image({
+                    source: new ol.source.ImageWMS({
                         url: blWMS,
                         params: {
                             VERSION: "1.0.0",
@@ -22,21 +22,11 @@
 
                 // Set what we want to view
                 var v0 = new ol.View({projection: "EPSG:4326"});
-                console.log(v0.getProjection().getExtent());
-                var bbox = [-18, 38, 38, 55]; //var bbox = v0.getProjection().getExtent();
+                var bbox = v0.getProjection().getExtent();
                 v0.fit(bbox, map.getSize());
                 console.log("Map extent for entire view: " + v0.calculateExtent(map.getSize()));
                 map.setView(v0);
-
-                // Change, live, the view projection
-                $(document).keypress(function () {
-                    var v1 = new ol.View({projection: "EPSG:3857"});
-                    var bbox = ol.proj.transformExtent([-18, 38, 38, 55], "EPSG:4326", "EPSG:3857");
-                    v1.fit(bbox, map.getSize());
-                    //map.setView(v1);
-                    showExtent(bbox);
-                });
-
+                
                 // --------------
                 showExtent(bbox);
             });
@@ -45,15 +35,7 @@
             #map {
                 width: 100%;
                 height: 100%;
-            }
-            .ol-zoom:hover {
-                background: lightskyblue;
-            }
-
-            .ol-zoom .ol-zoom-in, .ol-zoom .ol-zoom-out {
-                background-color: tomato;
-                border-radius: 50%;
-            }
+            }            
         </style>   
     </head>
     <body>
