@@ -22,11 +22,11 @@
 
                 // Set what we want to view
                 var v0 = new ol.View({projection: "EPSG:4326"});
-                var bbox = v0.getProjection().getExtent();
+                var bbox = [-18, 38, 38, 55];
                 v0.fit(bbox, map.getSize());
                 console.log("Map extent for entire view: " + v0.calculateExtent(map.getSize()));
                 map.setView(v0);
-                
+
                 // --------------
                 showExtent(bbox);
             });

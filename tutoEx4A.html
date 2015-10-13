@@ -10,16 +10,17 @@
                     layers: [
                         new ol.layer.Image({
                             source: new ol.source.ImageWMS({
-                                    url: "https://eu1.mapcentia.com/wms/oertz/public",
+                                    url: myOWS,
                                     params:{
                                         VERSION: "1.1.1",
-                                        LAYERS: 'public.world_simple,public.cities',
+                                        LAYERS: 'world_simple,cities',
                                         FORMAT: 'image/png'
                                 }
                             }),
                         })
                     ]
                 });
+                // default view is used here, that is with the Mercator EPSG:3857 projection
                 map.getView().setCenter(ol.proj.transform([7, 47],"EPSG:4326","EPSG:3857"))
                 map.getView().setZoom(5);
             });

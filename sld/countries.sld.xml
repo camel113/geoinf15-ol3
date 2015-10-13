@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<StyledLayerDescriptor version="1.0.0" 
+                       xmlns="http://www.opengis.net/sld" 
+                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd">   
+    <NamedLayer>
+        <Name>ne:ne_10m_admin_0_countries</Name>
+        <UserStyle>
+            <Name>Pink polygons</Name>
+            <FeatureTypeStyle>              
+                <Rule>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#FFC4FF</CssParameter>
+                            <CssParameter name="fill-opacity">1.0</CssParameter>
+                        </Fill>
+                        <Stroke>
+                            <CssParameter name="stroke">#FFC4FF</CssParameter>
+                            <CssParameter name="stroke-width">2</CssParameter>
+                        </Stroke>
+                    </PolygonSymbolizer>
+                </Rule>
+            </FeatureTypeStyle>
+        </UserStyle>
+    </NamedLayer>
+</StyledLayerDescriptor>

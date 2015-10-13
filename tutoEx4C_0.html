@@ -28,11 +28,7 @@
                                 }
                             })
                         }),
-                        new ol.layer.Tile({
-                            source: new ol.source.OSM()
-                        }),
                         new ol.layer.Image({
-                            opacity: 0.5,
                             source: new ol.source.ImageWMS({
                                 url: blWMS,
                                 params: {
@@ -74,11 +70,10 @@
                 // Set visibility of the baselayer
                 lyrs[0].setVisible(true);
                 lyrs[1].setVisible(false);
-                lyrs[2].setVisible(false);
                 
                 // Set visibility of the overlays
+                lyrs[2].setVisible(false);
                 lyrs[3].setVisible(false);
-                lyrs[4].setVisible(false);
                 $('#overlay option').prop('selected', false);
 
                 // Define the callback when the user does change the baselayer
@@ -86,7 +81,6 @@
                     // Reset all baselayers
                     lyrs[0].setVisible(false);
                     lyrs[1].setVisible(false);
-                    lyrs[2].setVisible(false);
 
                     // Activate the one that is selected (based on index)
                     var idxVisible = $(this).find(":selected").index();
@@ -97,7 +91,7 @@
                 $("#overlay").change(function (e) {
                     $(this).find("option").each(function (i, e) {
                         // i + 2 because the 1st and 2nd elements in the table of layers are the baselayers
-                        lyrs[i + 3].setVisible(e.selected);
+                        lyrs[i + 2].setVisible(e.selected);
                     });
                 });                
             }
@@ -123,7 +117,6 @@
             <select id="base">
                 <option value="base1">Countries</option>
                 <option value="base2">World simple</option>
-                <option value="base3">OSM</option>
             </select>
             <p>Choose overlays:</p>
             <select id="overlay" size="2" multiple>
