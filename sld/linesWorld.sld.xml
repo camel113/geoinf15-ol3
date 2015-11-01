@@ -10,7 +10,7 @@
     -->
     
     <NamedLayer>
-        <Name>geoinf:world_simple</Name>
+        <Name>public.world_simple</Name>
         <UserStyle>
             <Name>Pink polygons</Name>
             <FeatureTypeStyle>              

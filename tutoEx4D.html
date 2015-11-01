@@ -46,10 +46,10 @@
                         new ol.layer.Image({
                             title: 'World simple',
                             source: new ol.source.ImageWMS({
-                                url: myOWS,
+                                url: mcWMS,
                                 params: {
                                     VERSION: "1.1.1",
-                                    //LAYERS: 'world_simple',
+                                    //LAYERS: 'public.world_simple',
                                     SLD: "http://www.mediamaps.ch/oltuto/sld/linesWorld.sld.xml",
                                     FORMAT: 'image/png'
                                 }
@@ -70,10 +70,10 @@
                         new ol.layer.Image({
                             title: 'Cities',
                             source: new ol.source.ImageWMS({
-                                url: myOWS,
+                                url: mcWMS,
                                 params: {
                                     VERSION: "1.1.1",
-                                    LAYERS: 'cities',
+                                    LAYERS: 'public.cities',
                                     FORMAT: 'image/png'
                                 }
                             })

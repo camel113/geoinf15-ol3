@@ -28,10 +28,10 @@
                             title: 'World simple',
                             type: "base",                            
                             source: new ol.source.ImageWMS({
-                                url: myOWS,
+                                url: mcWMS,
                                 params: {
                                     VERSION: "1.1.1",
-                                    LAYERS: 'world_simple',
+                                    LAYERS: 'public.world_simple',
                                     FORMAT: 'image/png'
                                 }
                             })
@@ -50,10 +50,10 @@
                         new ol.layer.Image({
                             title: 'Cities',
                             source: new ol.source.ImageWMS({
-                                url: myOWS,
+                                url: mcWMS,
                                 params: {
                                     VERSION: "1.1.1",
-                                    LAYERS: 'cities',
+                                    LAYERS: 'public.cities',
                                     FORMAT: 'image/png'
                                 }
                             })
