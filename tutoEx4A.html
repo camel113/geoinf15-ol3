@@ -10,10 +10,10 @@
                     layers: [
                         new ol.layer.Image({
                             source: new ol.source.ImageWMS({
-                                    url: myOWS,
+                                    url: mcWMS,
                                     params:{
                                         VERSION: "1.1.1",
-                                        LAYERS: 'world_simple,cities',
+                                        LAYERS: 'public.world_simple,public.cities',
                                         FORMAT: 'image/png'
                                 }
                             }),
