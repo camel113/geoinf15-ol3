@@ -20,10 +20,10 @@
                         }),                                             
                         new ol.layer.Image({
                             source: new ol.source.ImageWMS({
-                                url: myOWS,
+                                url: mcWMS,
                                 params: {
                                     VERSION: "1.1.1",
-                                    LAYERS: 'world_simple',
+                                    LAYERS: 'public.world_simple',
                                     FORMAT: 'image/png'
                                 }
                             })
@@ -44,10 +44,10 @@
                         }),
                         new ol.layer.Image({
                             source: new ol.source.ImageWMS({
-                                url: myOWS,
+                                url: mcWMS,
                                 params: {
                                     VERSION: "1.1.1",
-                                    LAYERS: 'cities',
+                                    LAYERS: 'public.cities',
                                     FORMAT: 'image/png'
                                 }
                             })
@@ -96,7 +96,7 @@
                 // Define the callback when the user does change the overlays
                 $("#overlay").change(function (e) {
                     $(this).find("option").each(function (i, e) {
-                        // i + 2 because the 1st and 2nd elements in the table of layers are the baselayers
+                        // i + 3 because the 1st, 2nd and 3rd elements in the table of layers are the baselayers
                         lyrs[i + 3].setVisible(e.selected);
                     });
                 });                
