@@ -9,19 +9,16 @@
                 var fill = new ol.style.Fill({
                     color: '#acc000'
                 });
-                var redStroke = new ol.style.Stroke({
+                var stroke = new ol.style.Stroke({
                     color: '#ff0000',
-                    width: 10
-                });
-                var yelStroke = new ol.style.Stroke({
-                    color: '#ffff00',
                     width: 3
-                });               
-                var styleA = new ol.style.Style({
-                    stroke: redStroke
                 });
-                var styleB = new ol.style.Style({
-                    stroke: yelStroke
+                var style = new ol.style.Style({
+                    image: new ol.style.Icon({
+                        src: "http://www.cretasolaris.gr/gfx/marker.png",
+                        size: [36, 33],
+                        opacity: 1
+                    })
                 });
 
                 map = new ol.Map({
@@ -39,19 +36,16 @@
 
                 vecLayer = new ol.layer.Vector({
                     source: new ol.source.Vector({}),
-                    style: [styleA, styleB]
+                    style: style
                 })
 
                 var feature1 = new ol.Feature({
-                    geometry: new ol.geom.LineString([[738600, 6840171], [1938600, 6840171]])
+                    geometry: new ol.geom.Point([738600, 5840171]),
+                    name: "The precious is here!",
+                    author: "Gollum"
                 });
                 map.addLayer(vecLayer);
                 vecLayer.getSource().addFeature(feature1);
-
-                var feature2 = new ol.Feature({
-                    geometry: new ol.geom.LineString([[738600, 5840171], [1938600, 7840171]])
-                });
-                vecLayer.getSource().addFeature(feature2);
             });
         </script>
 

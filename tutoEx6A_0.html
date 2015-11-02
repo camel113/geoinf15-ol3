@@ -26,23 +26,23 @@
                 // Prepare a stroke style 
                 var redStroke = new ol.style.Stroke({
                     color: '#ff0000',
-                    width: 3,
-                    lineDash: [10, 6]
+                    width: 3
                 });
 
                 // Create a styling symbolizer
                 var style = new ol.style.Style({
-                    image: new ol.style.Icon({
-                        src: "http://www.cretasolaris.gr/gfx/marker.png",
-                        size: [36, 33],
-                        opacity: 1
-                    }),
-                    stroke: redStroke
+                    image: new ol.style.RegularShape({
+                        points: 4,
+                        stroke: redStroke,
+                        radius: 10,
+                        radius1: 0,
+                        radius2: 0
+                    })
                 });
 
                 // Create and style a feature
                 var feature = new ol.Feature({
-                    geometry: new ol.geom.LineString([[738600, 5840171],[1938600, 6840171]])
+                    geometry: new ol.geom.Point([738600, 5840171])
                 });
                 feature.setStyle(style);
                 // Add it to the vector layer
