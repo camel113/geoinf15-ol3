@@ -4,7 +4,7 @@
         <script type="text/javascript" src="js/config.js"></script>
         <script type="text/javascript">
             var map, vectorLayer;
-            //var proxy = "php/proxy2.php?url=";
+            var proxy = "php/proxy2.php?url=";
 
             $(document).ready(function () {
                 map = new ol.Map({
@@ -15,22 +15,24 @@
                     target: 'map',
                     layers: [
                         new ol.layer.Tile({
+                            opacity: 0.5,               // !!
                             source: new ol.source.OSM()
                         })
                     ]
                 });
                 vectorLayer = new ol.layer.Vector({
                     source: new ol.source.Vector({
-                        url: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson",
-                        format: new ol.format.GeoJSON()
-                        //url: proxy + 'http://www.visugpx.com/files/download.php?id=1416844831',
-                        //format: new ol.format.GPX()
+                        //url: "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson",
+                        //format: new ol.format.GeoJSON()
+                        url: proxy + 'http://www.visugpx.com/files/download.php?id=1416844831',
+                        format: new ol.format.GPX()
                     })
                 });
                 map.addLayer(vectorLayer);
 
                 $(document).keypress(function () {
                     var fts = vectorLayer.getSource().getFeatures();
+                    $("#info").html("");
                     for (var i = 0; i < fts.length; i++) {
                         $("#info").append($("<p>").html(fts[i].get("title")));
                     }
