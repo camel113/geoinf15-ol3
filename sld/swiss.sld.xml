@@ -10,21 +10,28 @@
     -->
     
     <NamedLayer>
-        <Name>geoinf:world_simple</Name>
+        <Name>public.world_simple</Name>
         <UserStyle>
-            <Name>Pink polygons</Name>
+            <Name>Swiss flag</Name>
             <FeatureTypeStyle>              
                 <Rule>
                     <Filter xmlns="http://www.opengis.net/ogc">                      
                         <PropertyIsEqualTo>
-                            <PropertyName>REGION</PropertyName>
-                            <Literal>NorthAfrica</Literal>
+                            <PropertyName>name</PropertyName>
+                            <Literal>Switzerland</Literal>
                         </PropertyIsEqualTo>
                     </Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#0088AA</CssParameter>
-                            <CssParameter name="fill-opacity">1.0</CssParameter>
+                            <GraphicFill>
+                                <Graphic>
+                                    <ExternalGraphic>
+                                        <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                            xlink:href="http://www.wtatennis.com/i/global/flags/48/SUI.png"/>
+                                        <Format>image/png</Format>
+                                    </ExternalGraphic>
+                                </Graphic>
+                            </GraphicFill>
                         </Fill>
                         <Stroke>
                             <CssParameter name="stroke">#000000</CssParameter>
@@ -33,7 +40,6 @@
                     </PolygonSymbolizer>
                 </Rule>
                 <Rule>
-                    <ElseFilter/>
                     <PolygonSymbolizer>
                         <Fill>
                             <CssParameter name="fill">#EEEEEE</CssParameter>

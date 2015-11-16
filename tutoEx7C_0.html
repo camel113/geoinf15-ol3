@@ -23,7 +23,7 @@
                         zoom: 4
                     })
                 });
-
+                
                 // Create/Add a WMS baselayer
                 wmsLayer = new ol.layer.Image({
                     source: wmsSource
@@ -35,7 +35,7 @@
                     source: new ol.source.Vector()
                 });
                 map.addLayer(vectors);
-
+                
                 map.on('singleclick', function (evt) {
                     var url = wmsSource.getGetFeatureInfoUrl(
                             evt.coordinate,
@@ -43,7 +43,7 @@
                             "EPSG:3857",
                             {
                                 INFO_FORMAT: "application/json",
-                                FEATURE_COUNT: 50
+                                FEATURE_COUNT: 1
                             }
                     );
                     if (url)
@@ -66,9 +66,9 @@
                         console.log(features);
 
                         if (features.length > 0) {
-                            //vectors.getSource().clear();
+                            vectors.getSource().clear();
                             vectors.getSource().addFeatures(features);
-                            $("#info").html(features[0].get("terr_name") + " [capital: " + features[0].get("capital") + "]");
+                            $("#info").html(features[0].get("terr_name"));
                         }
                     });
 
@@ -76,32 +76,6 @@
                         alert("Request failed: " + textStatus);
                     });
                 }
-
-                var selStyle = new ol.style.Style({
-                    stroke: new ol.style.Stroke({
-                        color: 'rgba(255, 0, 0, 1)',
-                        width: 3
-                    }),
-                    fill: new ol.style.Fill({
-                        color: 'rgba(200, 0, 0, 0.6)'
-                    })
-                });
-
-                var selectPointerMove = new ol.interaction.Select({
-                    condition: ol.events.condition.pointerMove,
-                    layers: [vectors]   // in our case this is optional as we only one vector layer in the map,
-                    ,style: selStyle
-                });
-
-                map.addInteraction(selectPointerMove);
-
-                selectPointerMove.on('select', function (e) {
-                    if (e.target.getFeatures().getLength() > 0) {
-                        $("#info").html(e.target.getFeatures().item(0).get('terr_name'));
-                    } else {
-                        $("#info").empty();
-                    }
-                });
             });
         </script>
 
@@ -114,7 +88,7 @@
                 position: absolute;
                 top: 20px;
                 left: 50px;
-                background-color: pink;
+                background-color: white;
                 border: solid gray 1px;
                 padding: 5px;
                 font-size: smaller;

@@ -11,6 +11,17 @@
 var blWMS = "http://demo.boundlessgeo.com/geoserver/wms";
 
 /*
+ * With the UNEP GRID GeoServer you can play with layers
+ * (see the Global Risk Data Platform map at http://preview.grid.unep.ch/index.php?preview=map): 
+ * - World
+ * - NationalParks
+ * - Cities_esri
+ * - etc (see http://preview.grid.unep.ch/geoserver/wms?REQUEST=GetCapabilities)
+ */
+var unWMS = "http://preview.grid.unep.ch/geoserver/wms";
+var unWFS = "http://preview.grid.unep.ch/geoserver/wfs";
+
+/*
  * With the MapCentia MapServer you can play with layers: 
  * - public.world_simple
  * - public.cities

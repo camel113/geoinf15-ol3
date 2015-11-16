@@ -44,8 +44,16 @@
                     name: "The precious is here!",
                     author: "Gollum"
                 });
+
+                var feature2 = new ol.Feature({
+                    geometry: new ol.geom.Point([1938600, 6840171]),
+                    name: "The hobbits are far away...",
+                    author: "Gandalf"
+                });
+
                 map.addLayer(vecLayer);
                 vecLayer.getSource().addFeature(feature1);
+                vecLayer.getSource().addFeature(feature2);
             });
         </script>
 

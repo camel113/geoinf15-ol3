@@ -26,6 +26,11 @@
                     })
                     return [style];
                 }
+                
+                vecLayer = new ol.layer.Vector({
+                    source: new ol.source.Vector(),
+                    style: createLordStyle
+                })
 
                 map = new ol.Map({
                     view: new ol.View({
@@ -40,10 +45,7 @@
                     ]
                 })
 
-                vecLayer = new ol.layer.Vector({
-                    source: new ol.source.Vector(),
-                    style: createLordStyle
-                })
+                
 
                 var feature = new ol.Feature({
                     geometry: new ol.geom.Point([738600, 5840171]),

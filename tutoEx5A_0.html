@@ -3,12 +3,12 @@
         <title>ol3 - Ex5A - GeoJSON vector overlay</title>
         <script type="text/javascript" src="js/config.js"></script>
         <script type="text/javascript">
-            var map;        
-            $(document).ready(function(){
+            var map;
+            $(document).ready(function () {
                 map = new ol.Map({
                     view: new ol.View({
-                        center:[738600, 5840171],
-                        zoom: 4
+                        center: [766225, 5908730],
+                        zoom: 10
                     }),
                     target: 'map',
                     layers: [
@@ -19,8 +19,8 @@
                 });
                 var vectorLayer = new ol.layer.Vector({
                     source: new ol.source.Vector({
-                        url: "data/4capitals.json",
-                        format: new ol.format.GeoJSON()
+                        url: "http://www.visugpx.com/files/download.php?id=1416844831",
+                        format: new ol.format.GPX()
                     })
                 });
                 map.addLayer(vectorLayer)

@@ -13,10 +13,11 @@
                 });
                 layer = new ol.layer.Image({
                             source: new ol.source.ImageWMS({
-                                    url: myOWS,
+                                    url: mcWMS,     // ou mcWMS
                                     params:{
                                         VERSION: "1.1.1",
-                                        LAYERS: 'geoinf:world_simple',
+                                        //LAYERS: 'public.world_simple',  // ou public.world_simple
+                                        SLD: 'http://www.mediamaps.ch/oltuto/sld/swiss.sld.xml',
                                         FORMAT: 'image/png'
                                 }
                             }),
